@@ -352,8 +352,7 @@
     border-radius: 0 !important;
   }
 
- /* Hide only on mobile */
-@media (max-width: 768px) {
+  /* Hide desktop-only wrapper, show mobile wrapper */
   .solution-section .hidden.md\:block {
     display: none !important;
   }
@@ -363,4 +362,91 @@
   }
 }
 
+/* === Partner Logo Frames === */
+.partner-logo-frame {
+  width: 140px;              /* Fixed frame width */
+  height: 100px;             /* Fixed frame height */
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.partner-logo-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(230, 194, 0, 0.2);
+}
+
+/* Dark mode variation */
+.dark .partner-logo-frame {
+  background: rgba(28, 28, 28, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+/* === Shared frame for partner logos === */
+.partner-logos-frame {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 9999px; /* pill shape */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 20px 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.dark .partner-logos-frame {
+  background: rgba(28, 28, 28, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  border-radius: 9999px; /* consistent pill shape */
+}
+@media (max-width: 768px) {
+  .partner-logo-item {
+    min-width: 90px !important;
+    margin: 0 6px !important;
+  }
+
+  .animate-scroll {
+    animation: scroll 12s linear infinite; /* faster speed */
+  }
+}
+
+/* Marquee animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  animation: scroll 25s linear infinite; /* desktop speed */
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .partner-logo-item {
+    min-width: 90px !important;
+    margin: 0 6px !important;
+  }
+
+  .animate-scroll {
+    animation: scroll 12s linear infinite; /* faster on mobile */
+  }
+}
+
+
+
