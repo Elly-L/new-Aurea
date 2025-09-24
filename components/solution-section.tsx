@@ -1,28 +1,37 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useScrollAnimation, getAnimationClasses } from "@/hooks/use-scroll-animation"
+import Image from "next/image";
+import { useScrollAnimation, getAnimationClasses } from "@/hooks/use-scroll-animation";
 
 export function SolutionSection() {
-  const { ref: titleRef, isInView: titleInView } = useScrollAnimation()
-  const { ref: cardsRef, isInView: cardsInView } = useScrollAnimation()
+  const { ref: titleRef, isInView: titleInView } = useScrollAnimation();
+  const { ref: cardsRef, isInView: cardsInView } = useScrollAnimation();
 
   return (
-    <section className="py-12">
+    <section className="solution-section py-12">
       <div className="container mx-auto px-6">
-        <div className="glass-card rounded-3xl p-12 max-w-6xl mx-auto">
-          <div ref={titleRef} className={`text-center mb-12 ${getAnimationClasses(titleInView, "up")}`}>
+
+        {/* ===== DESKTOP (outer card visible) ===== */}
+        <div className="hidden md:block glass-card rounded-3xl p-12 max-w-6xl mx-auto">
+          {/* Title */}
+          <div
+            ref={titleRef}
+            className={`text-center mb-12 ${getAnimationClasses(titleInView, "up")}`}
+          >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance font-serif text-glow">
               Meet <span className="text-primary">Aurea</span> — Your Elite AI Partner
             </h2>
             <p className="text-xl text-muted-foreground text-pretty max-w-3xl mx-auto font-sans">
-              More than automation — <span className="text-primary font-medium">Aurea</span> is your strategic
-              advantage. Operating seamlessly across WhatsApp, Instagram, and beyond, it transforms every touchpoint
-              into opportunity while you focus on scaling your empire.
+              More than automation —{" "}
+              <span className="text-primary font-medium">Aurea</span> is your strategic
+              advantage. Operating seamlessly across WhatsApp, Instagram, and beyond, it
+              transforms every touchpoint into opportunity while you focus on scaling your empire.
             </p>
           </div>
 
+          {/* Cards */}
           <div ref={cardsRef} className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Card 1 */}
             <div
               className={`space-y-8 ${getAnimationClasses(cardsInView, "left")}`}
               style={{ transitionDelay: "200ms" }}
@@ -37,7 +46,8 @@ export function SolutionSection() {
                     alt="Elite team leveraging Aurea AI for strategic advantage"
                     width={500}
                     height={350}
-                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110"
+                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110 
+                               w-auto h-auto max-w-full md:w-full md:h-auto"
                   />
                 </div>
                 <div className="space-y-3 text-sm font-sans">
@@ -57,6 +67,7 @@ export function SolutionSection() {
               </div>
             </div>
 
+            {/* Card 2 */}
             <div
               className={`space-y-8 ${getAnimationClasses(cardsInView, "right")}`}
               style={{ transitionDelay: "400ms" }}
@@ -71,7 +82,8 @@ export function SolutionSection() {
                     alt="Advanced AI interface demonstrating elite order management and premium service"
                     width={500}
                     height={600}
-                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110"
+                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110 
+                               w-auto h-auto max-w-full md:w-full md:h-auto"
                   />
                 </div>
                 <div className="space-y-3 text-sm font-sans">
@@ -92,7 +104,91 @@ export function SolutionSection() {
             </div>
           </div>
         </div>
+
+        {/* ===== MOBILE (outer card removed) ===== */}
+        <div className="block md:hidden max-w-6xl mx-auto">
+          {/* Title */}
+          <div
+            ref={titleRef}
+            className={`text-center mb-8 ${getAnimationClasses(titleInView, "up")}`}
+          >
+            <h2 className="text-3xl font-bold mb-4 font-serif">
+              Meet <span className="text-primary">Aurea</span> — Your Elite AI Partner
+            </h2>
+            <p className="text-base text-muted-foreground max-w-xl mx-auto font-sans">
+              More than automation —{" "}
+              <span className="text-primary font-medium">Aurea</span> is your strategic
+              advantage. Operating seamlessly across WhatsApp, Instagram, and beyond, it
+              transforms every touchpoint into opportunity while you focus on scaling your empire.
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div ref={cardsRef} className="space-y-8">
+            {/* Card 1 */}
+            <div
+              className={`glass-card rounded-2xl p-4 ${getAnimationClasses(cardsInView, "up")}`}
+            >
+              <h3 className="text-xl font-semibold mb-4 text-center font-serif text-primary">
+                Elite Performance Unlocked
+              </h3>
+              <Image
+                src="/training-guide.png"
+                alt="Elite team leveraging Aurea AI for strategic advantage"
+                width={500}
+                height={350}
+                className="rounded-xl shadow-lg w-full h-auto mb-4"
+              />
+              <ul className="space-y-2 text-sm font-sans">
+                <li className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>Instant mastery of premium resources</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>AI-powered excellence at scale</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>Seamless elite team orchestration</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Card 2 */}
+            <div
+              className={`glass-card rounded-2xl p-4 ${getAnimationClasses(cardsInView, "up")}`}
+              style={{ transitionDelay: "200ms" }}
+            >
+              <h3 className="text-xl font-semibold mb-4 text-center font-serif text-primary">
+                Precision Intelligence Interface
+              </h3>
+              <Image
+                src="/ai-interface.png"
+                alt="Advanced AI interface demonstrating elite order management and premium service"
+                width={500}
+                height={600}
+                className="rounded-xl shadow-lg w-full h-auto mb-4"
+              />
+              <ul className="space-y-2 text-sm font-sans">
+                <li className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>Intelligent order orchestration</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>Transparent AI decision-making</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>Omnichannel excellence delivery</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
-  )
+  );
 }
