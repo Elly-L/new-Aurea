@@ -15,7 +15,7 @@ export default function LoadingIntro({ onDone }: { onDone: () => void }) {
       const doneTimer = setTimeout(() => {
         setShow(false)
         onDone()
-      }, 1500)
+      }, 1800) // give enough time for smooth docking before fade-out
       return () => clearTimeout(doneTimer)
     }, 5000)
 
@@ -29,50 +29,56 @@ export default function LoadingIntro({ onDone }: { onDone: () => void }) {
           className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#D4AF37]"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           {/* Circle wrapper */}
           <motion.div
             className="relative"
             initial={{
-              scale: 1,
-              width: 160,
-              height: 160,
+              scale: 0,
+              opacity: 0,
+              y: -30,
             }}
             animate={
               docked
                 ? {
                     scale: 0.5,
+                    opacity: 1,
                     width: 80,
                     height: 80,
+                    x: "calc(50vw - 50%)", // ensures smooth transition from center
+                    y: "calc(50vh - 50%)",
                     bottom: 20,
                     right: 20,
-                    position: "absolute",
                   }
                 : {
                     scale: 1,
+                    opacity: 1,
                     width: 160,
                     height: 160,
-                    position: "relative",
+                    y: 0,
                   }
             }
-            transition={{ duration: 1, ease: "easeInOut" }}
+            transition={{
+              duration: docked ? 1.4 : 1.2,
+              ease: "easeInOut",
+            }}
             style={{ willChange: "transform" }}
           >
-            {/* Glowing ring + subtle fireballs */}
+            {/* Glowing ring */}
             {/* @ts-ignore */}
             <PulsingBorder
               colors={["#FFD700", "#FF6B35", "#8A2BE2"]}
               colorBack="#00000000"
               speed={1.2}
               roundness={1}
-              thickness={0.22}   // visible ring thickness
-              softness={0.02}    // sharp edges, slight blend
-              intensity={3.5}    // balanced glow
-              spots={4}          // a few fireballs
-              spotSize={0.25}    // small subtle sparks
-              pulse={0.15}       // gentle breathing
-              smoke={0}          // no heavy smoke blur
+              thickness={0.22}
+              softness={0.02}
+              intensity={3.5}
+              spots={4}
+              spotSize={0.25}
+              pulse={0.15}
+              smoke={0}
               smokeSize={0}
               scale={1}
               rotation={0}
