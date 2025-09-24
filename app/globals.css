@@ -1,0 +1,312 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Light theme - existing luxury gold/white theme */
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: rgba(255, 255, 255, 0.8);
+  --card-foreground: #000000;
+  --popover: rgba(255, 255, 255, 0.9);
+  --popover-foreground: #000000;
+  --primary: #e6c200;
+  --primary-foreground: #ffffff;
+  --secondary: #e6e6e6;
+  --secondary-foreground: #000000;
+  --muted: #f9f9f9;
+  --muted-foreground: #475569;
+  --accent: #e6c200;
+  --accent-foreground: #ffffff;
+  --destructive: #ff4c4c;
+  --destructive-foreground: #ffffff;
+  --border: #e6e6e6;
+  --input: #f9f9f9;
+  --ring: rgba(230, 194, 0, 0.5);
+  --chart-1: #e6c200;
+  --chart-2: #e6e6e6;
+  --chart-3: #ffffff;
+  --chart-4: #f9f9f9;
+  --chart-5: #475569;
+  --radius: 0.75rem;
+  --sidebar: rgba(255, 255, 255, 0.8);
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #e6c200;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6e6e6;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #e6e6e6;
+  --sidebar-ring: rgba(230, 194, 0, 0.5);
+  --font-sans: var(--font-inter), "Inter", sans-serif;
+  --font-serif: var(--font-playfair), "Playfair Display", serif;
+  --font-cormorant: var(--font-cormorant), "Cormorant Garamond", serif;
+}
+
+.dark {
+  /* Luxury dark theme inspired by Amex Black card */
+  --background: #0d0d0d; /* Onyx Black */
+  --foreground: #faf9f6; /* Off-white Ivory */
+  --card: rgba(28, 28, 28, 0.95); /* Charcoal with high opacity */
+  --card-foreground: #faf9f6; /* Off-white Ivory */
+  --popover: rgba(28, 28, 28, 0.98);
+  --popover-foreground: #faf9f6;
+  --primary: #d4af37; /* Metallic Gold */
+  --primary-foreground: #0d0d0d; /* Onyx Black text on gold */
+  --secondary: #c5c6c7; /* Platinum Gray */
+  --secondary-foreground: #0d0d0d; /* Dark text on platinum */
+  --muted: #1c1c1c; /* Charcoal */
+  --muted-foreground: #c5c6c7; /* Platinum Gray */
+  --accent: #ead7bd; /* Champagne */
+  --accent-foreground: #0d0d0d; /* Dark text on champagne */
+  --destructive: #ff4c4c;
+  --destructive-foreground: #faf9f6;
+  --border: rgba(234, 215, 189, 0.2); /* Champagne border with transparency */
+  --input: rgba(28, 28, 28, 0.8);
+  --ring: rgba(212, 175, 55, 0.5); /* Metallic Gold ring */
+  --chart-1: #d4af37; /* Metallic Gold */
+  --chart-2: #ead7bd; /* Champagne */
+  --chart-3: #c5c6c7; /* Platinum Gray */
+  --chart-4: #1c1c1c; /* Charcoal */
+  --chart-5: #faf9f6; /* Off-white Ivory */
+  --sidebar: rgba(28, 28, 28, 0.95);
+  --sidebar-foreground: #faf9f6;
+  --sidebar-primary: #d4af37;
+  --sidebar-primary-foreground: #0d0d0d;
+  --sidebar-accent: #ead7bd;
+  --sidebar-accent-foreground: #0d0d0d;
+  --sidebar-border: rgba(234, 215, 189, 0.2);
+  --sidebar-ring: rgba(212, 175, 55, 0.5);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif), Georgia, serif;
+  }
+
+  .font-cormorant {
+    font-family: var(--font-cormorant), Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Enhanced glassmorphism for luxury dark theme */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(28, 28, 28, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(234, 215, 189, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(230, 194, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-card {
+  background: rgba(28, 28, 28, 0.85);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(234, 215, 189, 0.1);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(230, 194, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-nav {
+  background: rgba(28, 28, 28, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced chat bubble styles for dark theme */
+.chat-bubble {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(230, 194, 0, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  padding: 12px 16px;
+  position: absolute;
+  animation: float 3s ease-in-out infinite;
+}
+
+.dark .chat-bubble {
+  background: rgba(28, 28, 28, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  color: var(--foreground);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.chat-bubble-1 {
+  animation-delay: 0s;
+}
+.chat-bubble-2 {
+  animation-delay: 1s;
+}
+.chat-bubble-3 {
+  animation-delay: 2s;
+}
+
+/* Enhanced image box for dark theme */
+.image-box {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(230, 194, 0, 0.2);
+}
+
+.dark .image-box {
+  background: rgba(28, 28, 28, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: inset 0 1px 0 rgba(234, 215, 189, 0.1);
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Luxury button hover effects for dark theme */
+.btn-primary-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary-hover:hover::before {
+  left: 100%;
+}
+
+.btn-secondary-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(234, 215, 189, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-secondary-hover:hover::before {
+  left: 100%;
+}
+
+/* Text glow effects for luxury headlines in dark mode */
+.dark .text-glow {
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.dark .text-champagne-glow {
+  text-shadow: 0 0 8px rgba(234, 215, 189, 0.4);
+}
