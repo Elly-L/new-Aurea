@@ -1,28 +1,56 @@
-"use client"
-
-import { useScrollAnimation, getAnimationClasses } from "@/hooks/use-scroll-animation"
+import Image from "next/image"
 import { ScrollReveal } from "@/components/scroll-reveal"
 
 export function KeyBenefitsSection() {
-  const { ref, isInView } = useScrollAnimation()
-
   return (
-    <section ref={ref} className={`py-2 ${getAnimationClasses(isInView, "up")}`}>
+    <section className="py-20">
       <div className="container mx-auto px-6">
-        <ScrollReveal direction="right">
-          <div className="glass-card rounded-3xl p-12 max-w-6xl mx-auto">
-            <div className="text-center">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance font-serif text-glow">
-                Unlock Elite Performance — <span className="text-primary">Aurea</span> Delivers Excellence
-              </h2>
-              <p className="text-xl text-muted-foreground text-pretty max-w-4xl mx-auto leading-relaxed font-sans">
-                <span className="text-primary font-medium">Auréa</span> elevates every interaction with precision and
-                care. By automating the essentials — from scheduling to follow-ups — it reclaims your time, strengthens
-                client trust, and ensures your brand feels effortless, polished, and always present.
-              </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Text side */}
+            <div className="space-y-8">
+              <ScrollReveal direction="up">
+                <h2 className="text-4xl md:text-5xl font-bold text-balance font-serif">
+                  Aurea makes{" "}
+                  <span className="text-destructive">running your business</span>{" "}
+                  effortless
+                </h2>
+              </ScrollReveal>
+
+              <ScrollReveal direction="up" delay={0.2}>
+                <ul className="space-y-4 text-muted-foreground font-sans leading-relaxed">
+                  <li className="flex items-start space-x-3">
+                    <span className="text-destructive">•</span>
+                    <span>Instant responses to clients 24/7</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="text-destructive">•</span>
+                    <span>Automated booking and reminders</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <span className="text-destructive">•</span>
+                    <span>No more missed calls or lost clients</span>
+                  </li>
+                </ul>
+              </ScrollReveal>
             </div>
+
+            {/* Image side */}
+            <ScrollReveal direction="right">
+              <div className="relative">
+                <Image
+                  src="/hero-slide-3.png"
+                  alt="Happy spa client after smooth booking"
+                  width={500}
+                  height={500}
+                  className="rounded-2xl shadow-xl 
+                             w-auto h-auto max-w-full 
+                             md:w-full md:h-auto"
+                />
+              </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   )

@@ -25,25 +25,27 @@ export function ProblemSection() {
                     alt="Overwhelmed spa business owner dealing with multiple issues"
                     width={500}
                     height={600}
-                    className="rounded-2xl shadow-xl"
+                    className="rounded-2xl shadow-xl 
+                               w-auto h-auto max-w-full 
+                               md:w-full md:h-auto"
                   />
                 </div>
               </ScrollReveal>
 
-              {/* Floating chat bubbles */}
-              <div className="chat-bubble chat-bubble-1 top-4 -right-4 lg:-right-8">
+              {/* Floating chat bubbles (hidden on mobile) */}
+              <div className="hidden md:block chat-bubble chat-bubble-1 top-4 -right-4 lg:-right-8">
                 <p className="text-sm font-medium text-red-600">
                   Messy inbox with missed messages
                 </p>
               </div>
 
-              <div className="chat-bubble chat-bubble-2 top-1/2 -left-4 lg:-left-8">
+              <div className="hidden md:block chat-bubble chat-bubble-2 top-1/2 -left-4 lg:-left-8">
                 <p className="text-sm font-medium text-red-600">
                   Manual booking coordination
                 </p>
               </div>
 
-              <div className="chat-bubble chat-bubble-3 bottom-8 -right-4 lg:-right-8">
+              <div className="hidden md:block chat-bubble chat-bubble-3 bottom-8 -right-4 lg:-right-8">
                 <p className="text-sm font-medium text-red-600">
                   Overwhelmed staff
                 </p>

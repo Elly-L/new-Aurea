@@ -11,18 +11,25 @@ export function SolutionSection() {
     <section className="py-12">
       <div className="container mx-auto px-6">
         <div className="glass-card rounded-3xl p-12 max-w-6xl mx-auto">
-          <div ref={titleRef} className={`text-center mb-12 ${getAnimationClasses(titleInView, "up")}`}>
+          {/* Title */}
+          <div
+            ref={titleRef}
+            className={`text-center mb-12 ${getAnimationClasses(titleInView, "up")}`}
+          >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance font-serif text-glow">
               Meet <span className="text-primary">Aurea</span> — Your Elite AI Partner
             </h2>
             <p className="text-xl text-muted-foreground text-pretty max-w-3xl mx-auto font-sans">
-              More than automation — <span className="text-primary font-medium">Aurea</span> is your strategic
-              advantage. Operating seamlessly across WhatsApp, Instagram, and beyond, it transforms every touchpoint
-              into opportunity while you focus on scaling your empire.
+              More than automation —{" "}
+              <span className="text-primary font-medium">Aurea</span> is your strategic
+              advantage. Operating seamlessly across WhatsApp, Instagram, and beyond, it
+              transforms every touchpoint into opportunity while you focus on scaling your empire.
             </p>
           </div>
 
+          {/* Cards */}
           <div ref={cardsRef} className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Card 1 */}
             <div
               className={`space-y-8 ${getAnimationClasses(cardsInView, "left")}`}
               style={{ transitionDelay: "200ms" }}
@@ -37,7 +44,8 @@ export function SolutionSection() {
                     alt="Elite team leveraging Aurea AI for strategic advantage"
                     width={500}
                     height={350}
-                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110"
+                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110 
+                               w-auto h-auto max-w-full md:w-full md:h-auto"
                   />
                 </div>
                 <div className="space-y-3 text-sm font-sans">
@@ -57,6 +65,7 @@ export function SolutionSection() {
               </div>
             </div>
 
+            {/* Card 2 */}
             <div
               className={`space-y-8 ${getAnimationClasses(cardsInView, "right")}`}
               style={{ transitionDelay: "400ms" }}
@@ -71,7 +80,8 @@ export function SolutionSection() {
                     alt="Advanced AI interface demonstrating elite order management and premium service"
                     width={500}
                     height={600}
-                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110"
+                    className="rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-110 
+                               w-auto h-auto max-w-full md:w-full md:h-auto"
                   />
                 </div>
                 <div className="space-y-3 text-sm font-sans">
