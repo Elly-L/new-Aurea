@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { motion, AnimatePresence } from "framer-motion"
 
 const slides = [
   {
@@ -28,6 +29,7 @@ const slides = [
 export function HeroSlideshow() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [showNav, setShowNav] = useState(false)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -35,6 +37,20 @@ export function HeroSlideshow() {
     }, 6000)
     return () => clearInterval(timer)
   }, [currentSlide])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroHeight = window.innerHeight * 0.8
+      if (window.scrollY > heroHeight) {
+        setShowNav(true)
+      } else {
+        setShowNav(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const nextSlide = () => {
     if (isAnimating) return
@@ -65,6 +81,41 @@ export function HeroSlideshow() {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
+      {/* Floating logo + button before nav */}
+      <AnimatePresence>
+        {!showNav && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="absolute top-6 left-6 z-50"
+            >
+              <Image
+                src="/aurea-logo.png"
+                alt="Aurea Intelligence"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+              className="absolute top-6 right-6 z-50"
+            >
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 btn-primary-hover">
+                Join the Waitlist
+              </Button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Background Images */}
       {slides.map(
         (slide, index) =>
@@ -87,6 +138,7 @@ export function HeroSlideshow() {
           ),
       )}
 
+      {/* Hero content */}
       <div className="relative z-10 min-h-screen flex items-end justify-start pb-16 pl-6 md:pl-12">
         <ScrollReveal direction="up" delay={0.5}>
           <div className="max-w-xl">
@@ -111,6 +163,7 @@ export function HeroSlideshow() {
         </ScrollReveal>
       </div>
 
+      {/* Slide controls */}
       <button
         onClick={prevSlide}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-200 btn-secondary-hover"
@@ -131,7 +184,7 @@ export function HeroSlideshow() {
         </svg>
       </button>
 
-      {/* Slide Indicators */}
+      {/* Slide indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
         {slides.map((_, index) => (
           <button
