@@ -446,6 +446,7 @@
   .animate-scroll {
     animation: scroll 12s linear infinite; /* faster on mobile */
   }
+  
 }
 
 

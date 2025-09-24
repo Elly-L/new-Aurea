@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useScrollAnimation, getAnimationClasses } from "@/hooks/use-scroll-animation";
 
@@ -7,16 +6,19 @@ export function SolutionSection() {
   const { ref: titleRef, isInView: titleInView } = useScrollAnimation();
   const { ref: cardsRef, isInView: cardsInView } = useScrollAnimation();
 
+  // Helper to add animation classes only if in view, otherwise returns empty string
+  // So elements are always rendered visibly without hiding when not in view
+  const safeAnimationClass = (inView, direction) => (inView ? getAnimationClasses(inView, direction) : "");
+
   return (
     <section className="solution-section py-12">
       <div className="container mx-auto px-6">
-
         {/* ===== DESKTOP (outer card visible) ===== */}
         <div className="hidden md:block glass-card rounded-3xl p-12 max-w-6xl mx-auto">
           {/* Title */}
           <div
             ref={titleRef}
-            className={`text-center mb-12 ${getAnimationClasses(titleInView, "up")}`}
+            className={`text-center mb-12 ${safeAnimationClass(titleInView, "up")}`}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance font-serif text-glow">
               Meet <span className="text-primary">Aurea</span> — Your Elite AI Partner
@@ -28,12 +30,11 @@ export function SolutionSection() {
               transforms every touchpoint into opportunity while you focus on scaling your empire.
             </p>
           </div>
-
           {/* Cards */}
           <div ref={cardsRef} className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Card 1 */}
             <div
-              className={`space-y-8 ${getAnimationClasses(cardsInView, "left")}`}
+              className={`space-y-8 ${safeAnimationClass(cardsInView, "left")}`}
               style={{ transitionDelay: "200ms" }}
             >
               <div className="glass-card rounded-2xl p-6 group cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(230,194,0,0.15)]">
@@ -66,10 +67,9 @@ export function SolutionSection() {
                 </div>
               </div>
             </div>
-
             {/* Card 2 */}
             <div
-              className={`space-y-8 ${getAnimationClasses(cardsInView, "right")}`}
+              className={`space-y-8 ${safeAnimationClass(cardsInView, "right")}`}
               style={{ transitionDelay: "400ms" }}
             >
               <div className="glass-card rounded-2xl p-6 group cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(230,194,0,0.15)]">
@@ -104,13 +104,12 @@ export function SolutionSection() {
             </div>
           </div>
         </div>
-
         {/* ===== MOBILE (outer card removed) ===== */}
         <div className="block md:hidden max-w-6xl mx-auto">
           {/* Title */}
           <div
             ref={titleRef}
-            className={`text-center mb-8 ${getAnimationClasses(titleInView, "up")}`}
+            className={`text-center mb-8 ${safeAnimationClass(titleInView, "up")}`}
           >
             <h2 className="text-3xl font-bold mb-4 font-serif">
               Meet <span className="text-primary">Aurea</span> — Your Elite AI Partner
@@ -122,12 +121,11 @@ export function SolutionSection() {
               transforms every touchpoint into opportunity while you focus on scaling your empire.
             </p>
           </div>
-
           {/* Cards */}
           <div ref={cardsRef} className="space-y-8">
             {/* Card 1 */}
             <div
-              className={`glass-card rounded-2xl p-4 ${getAnimationClasses(cardsInView, "up")}`}
+              className={`glass-card rounded-2xl p-4 ${safeAnimationClass(cardsInView, "up")}`}
             >
               <h3 className="text-xl font-semibold mb-4 text-center font-serif text-primary">
                 Elite Performance Unlocked
@@ -154,10 +152,9 @@ export function SolutionSection() {
                 </li>
               </ul>
             </div>
-
             {/* Card 2 */}
             <div
-              className={`glass-card rounded-2xl p-4 ${getAnimationClasses(cardsInView, "up")}`}
+              className={`glass-card rounded-2xl p-4 ${safeAnimationClass(cardsInView, "up")}`}
               style={{ transitionDelay: "200ms" }}
             >
               <h3 className="text-xl font-semibold mb-4 text-center font-serif text-primary">
@@ -187,7 +184,6 @@ export function SolutionSection() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
