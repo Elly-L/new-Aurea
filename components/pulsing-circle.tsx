@@ -1,44 +1,61 @@
 "use client"
 
+import { PulsingBorder } from "@paper-design/shaders-react"
+import { motion } from "framer-motion"
 import Image from "next/image"
 
 export default function PulsingCircle() {
   return (
     <div className="fixed bottom-8 right-8 z-50">
       <div className="relative w-20 h-20 flex items-center justify-center">
-        <div className="absolute inset-0 w-full h-full rounded-full">
-          {/* Outer pulsing ring */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-primary animate-pulse opacity-60" />
-
-          {/* Inner glow ring */}
-          <div className="absolute inset-1 rounded-full bg-gradient-to-r from-primary/40 via-accent/40 to-primary/40 animate-pulse delay-500" />
-
-          {/* Core ring */}
-          <div className="absolute inset-2 rounded-full bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20" />
-        </div>
+        {/* Pulsing Border Circle */}
+        <PulsingBorder
+          colors={["#BEECFF", "#E77EDC", "#FF4C3E", "#00FF88", "#FFD700", "#FF6B35", "#8A2BE2"]}
+          colorBack="#00000000"
+          speed={1.5}
+          roundness={1}
+          thickness={0.1}
+          softness={0.2}
+          intensity={5}
+          spotsPerColor={5}
+          spotSize={0.1}
+          pulse={0.1}
+          smoke={0.5}
+          smokeSize={4}
+          scale={0.65}
+          rotation={0}
+          frame={9161408.251009725}
+          style={{
+            width: "60px",
+            height: "60px",
+            borderRadius: "50%",
+          }}
+        />
 
         <div className="absolute inset-0 flex items-center justify-center">
           <Image src="/aurea-logo.png" alt="Aurea Logo" width={24} height={24} className="z-10" />
         </div>
 
-        <svg
-          className="absolute inset-0 w-full h-full animate-spin"
+        <motion.svg
+          className="absolute inset-0 w-full h-full"
           viewBox="0 0 100 100"
-          style={{
-            transform: "scale(1.6)",
-            animationDuration: "20s",
-            animationTimingFunction: "linear",
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 20,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
           }}
+          style={{ transform: "scale(1.6)" }}
         >
           <defs>
             <path id="circle" d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
           </defs>
-          <text className="text-sm fill-foreground font-medium">
+          <text className="text-sm fill-black font-medium">
             <textPath href="#circle" startOffset="0%">
               Aurea Intelligence . Aurea Intelligence
             </textPath>
           </text>
-        </svg>
+        </motion.svg>
       </div>
     </div>
   )
