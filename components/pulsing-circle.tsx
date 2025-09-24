@@ -32,10 +32,12 @@ export default function PulsingCircle() {
           }}
         />
 
+        {/* Center logo */}
         <div className="absolute inset-0 flex items-center justify-center">
           <Image src="/aurea-logo.png" alt="Aurea Logo" width={24} height={24} className="z-10" />
         </div>
 
+        {/* Rotating text */}
         <motion.svg
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 100 100"
@@ -50,7 +52,8 @@ export default function PulsingCircle() {
           <defs>
             <path id="circle" d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
           </defs>
-          <text className="text-sm fill-black font-medium">
+          {/* 👇 Tailwind handles theme switching */}
+          <text className="text-sm font-medium fill-black dark:fill-white">
             <textPath href="#circle" startOffset="0%">
               Aurea Intelligence . Aurea Intelligence
             </textPath>
