@@ -139,7 +139,7 @@ export function HeroSlideshow() {
           ),
       )}
 
-      {/* Mobile Image (normal flow, not absolute) */}
+      {/* Mobile Image (normal flow) */}
       <div className="md:hidden relative w-full h-[260px]">
         <Image
           src={slides[currentSlide].image}
@@ -182,7 +182,12 @@ export function HeroSlideshow() {
       {/* Slide controls */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-200 btn-secondary-hover"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full
+        bg-black/10 text-black hover:bg-black/20
+        dark:bg-white/10 dark:text-white dark:hover:bg-white/20
+        md:bg-white/10 md:text-white md:hover:bg-white/20
+        backdrop-blur-sm border border-transparent md:border-white/20
+        transition-all duration-200 btn-secondary-hover"
         disabled={isAnimating}
       >
         <svg
@@ -197,7 +202,12 @@ export function HeroSlideshow() {
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-200 btn-secondary-hover"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full
+        bg-black/10 text-black hover:bg-black/20
+        dark:bg-white/10 dark:text-white dark:hover:bg-white/20
+        md:bg-white/10 md:text-white md:hover:bg-white/20
+        backdrop-blur-sm border border-transparent md:border-white/20
+        transition-all duration-200 btn-secondary-hover"
         disabled={isAnimating}
       >
         <svg
@@ -216,9 +226,11 @@ export function HeroSlideshow() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? "bg-primary scale-125 shadow-lg" : "bg-white/40 hover:bg-white/60"
-            }`}
+            className={`w-3 h-3 rounded-full transition-all duration-300 
+              ${index === currentSlide
+                ? "bg-primary scale-125 shadow-lg"
+                : "bg-black/40 hover:bg-black/60 dark:bg-white/40 dark:hover:bg-white/60 md:bg-white/40 md:hover:bg-white/60"
+              }`}
             disabled={isAnimating}
           />
         ))}
