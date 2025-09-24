@@ -16,7 +16,8 @@ const slides = [
   {
     image: "/hero-slide-2.jpeg",
     title: "Bespoke Intelligence Suites — Engineered for Market Dominance.",
-    subtitle: "Transform every interaction into competitive advantage with AI that never sleeps, never compromises.",
+    subtitle:
+      "Transform every interaction into competitive advantage with AI that never sleeps, never compromises.",
   },
   {
     image: "/hero-slide-3.png",
@@ -80,7 +81,7 @@ export function HeroSlideshow() {
   }
 
   return (
-    <section className="relative min-h-fit md:min-h-screen overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Floating logo + button before nav */}
       <AnimatePresence>
         {!showNav && (
@@ -116,51 +117,64 @@ export function HeroSlideshow() {
         )}
       </AnimatePresence>
 
-      {/* Background Images */}
+      {/* Desktop Background Images */}
       {slides.map(
         (slide, index) =>
           index === currentSlide && (
             <div
               key={index}
-              className={`relative w-full transition-opacity duration-1000 ${
+              className={`absolute inset-0 transition-opacity duration-1000 hidden md:block ${
                 index === currentSlide ? "opacity-100" : "opacity-0"
               }`}
             >
-              <div className="relative w-full h-[320px] sm:h-[420px] md:h-screen">
-                <Image
-                  src={slide.image || "/placeholder.svg"}
-                  alt={`Hero slide ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10 dark:from-black/80 dark:via-black/50 dark:to-black/20" />
-              </div>
+              <Image
+                src={slide.image || "/placeholder.svg"}
+                alt={`Hero slide ${index + 1}`}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 dark:from-black/90 dark:via-black/60 dark:to-black/30" />
             </div>
           ),
       )}
 
-      {/* Hero content */}
-      <div className="relative z-10 min-h-[300px] md:min-h-screen flex items-end justify-start pb-10 md:pb-16 pl-6 md:pl-12">
+      {/* Mobile Image (normal flow, not absolute) */}
+      <div className="md:hidden relative w-full h-[260px]">
+        <Image
+          src={slides[currentSlide].image}
+          alt={`Slide ${currentSlide + 1}`}
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      {/* Mobile Content BELOW image */}
+      <div className="block md:hidden px-6 py-6">
+        <h1 className="text-2xl font-bold mb-3 text-black dark:text-white font-serif">
+          {slides[currentSlide].title}
+        </h1>
+        <p className="text-sm mb-4 text-black/80 dark:text-white/90 font-sans leading-relaxed">
+          {slides[currentSlide].subtitle}
+        </p>
+        <Button className="bg-primary text-white rounded-full px-5 py-2 shadow-md">
+          Unlock Elite Access
+        </Button>
+      </div>
+
+      {/* Desktop Content Overlay */}
+      <div className="hidden md:flex relative z-10 min-h-screen items-end justify-start pb-16 pl-12">
         <ScrollReveal direction="up" delay={0.5}>
           <div className="max-w-xl">
-            <div key={currentSlide}>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-balance text-black dark:text-white font-serif text-shadow-lg">
-                {slides[currentSlide].title}
-              </h1>
-              <p className="text-sm md:text-base mb-4 text-pretty font-sans leading-relaxed text-black/80 dark:text-white/90">
-                {slides[currentSlide].subtitle}
-              </p>
-
-              <div className="flex items-start">
-                <Button
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-sans btn-primary-hover"
-                >
-                  <span className="relative z-10">Unlock Elite Access</span>
-                </Button>
-              </div>
-            </div>
+            <h1 className="text-4xl font-bold mb-3 text-white font-serif">
+              {slides[currentSlide].title}
+            </h1>
+            <p className="text-base text-white/90 mb-4 font-sans leading-relaxed">
+              {slides[currentSlide].subtitle}
+            </p>
+            <Button className="bg-primary text-white rounded-full px-5 py-2 shadow-md">
+              Unlock Elite Access
+            </Button>
           </div>
         </ScrollReveal>
       </div>
@@ -168,40 +182,42 @@ export function HeroSlideshow() {
       {/* Slide controls */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full 
-                   bg-black/10 text-black border border-black/20 hover:bg-black/20 
-                   dark:bg-white/10 dark:text-white dark:border-white/20 dark:hover:bg-white/20 
-                   backdrop-blur-sm transition-all duration-200 btn-secondary-hover"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-200 btn-secondary-hover"
         disabled={isAnimating}
       >
-        <svg className="w-6 h-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg
+          className="w-6 h-6 relative z-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full 
-                   bg-black/10 text-black border border-black/20 hover:bg-black/20 
-                   dark:bg-white/10 dark:text-white dark:border-white/20 dark:hover:bg-white/20 
-                   backdrop-blur-sm transition-all duration-200 btn-secondary-hover"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-200 btn-secondary-hover"
         disabled={isAnimating}
       >
-        <svg className="w-6 h-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg
+          className="w-6 h-6 relative z-10"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
       {/* Slide indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide
-                ? "bg-primary scale-125 shadow-lg"
-                : "bg-black/40 hover:bg-black/60 dark:bg-white/40 dark:hover:bg-white/60"
+              index === currentSlide ? "bg-primary scale-125 shadow-lg" : "bg-white/40 hover:bg-white/60"
             }`}
             disabled={isAnimating}
           />

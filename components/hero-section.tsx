@@ -23,7 +23,7 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+    <section className="min-h-fit md:min-h-screen flex items-center justify-center relative overflow-hidden pt-6 md:pt-20">
       {/* Floating logo + button (only before nav appears) */}
       <AnimatePresence>
         {!showNav && (
@@ -62,21 +62,21 @@ export function HeroSection() {
       {/* Hero content */}
       <div className="container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance text-black">
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-6 text-balance text-black">
             Your Smart Assistant for Clients — On{" "}
             <span className="text-primary">WhatsApp, Instagram & Beyond</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 text-pretty">
+          <p className="text-lg md:text-2xl text-gray-700 mb-8 text-pretty">
             Capture leads, confirm bookings, send reminders, and follow up — all without lifting a finger.
           </p>
           <Button
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-4 rounded-full"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full"
           >
             Join the Waitlist
           </Button>
 
-          <div className="mt-16 max-w-2xl mx-auto">
+          <div className="mt-10 md:mt-16 max-w-2xl mx-auto">
             <Image
               src="/success-booking.png"
               alt="Successful booking confirmation with Aurea AI"
