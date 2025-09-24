@@ -310,3 +310,50 @@
 .dark .text-champagne-glow {
   text-shadow: 0 0 8px rgba(234, 215, 189, 0.4);
 }
+
+/* --- Mobile Fixes (no nested @media!) --- */
+@media (max-width: 768px) {
+  /* Remove outer glass-card styling on Problem, Solution, Key Benefits */
+  .problem-section > .container > .glass-card,
+  .solution-section > .container > .glass-card,
+  .key-benefits-section > .container > .glass-card {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  /* Remove side padding inside */
+  .problem-section > .container > .glass-card > *,
+  .solution-section > .container > .glass-card > *,
+  .key-benefits-section > .container > .glass-card > * {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Force images full width */
+  .problem-section img,
+  .solution-section img,
+  .key-benefits-section img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 0 !important;
+  }
+
+  /* Solution-specific tweak: flatten inner cards */
+  .solution-section .glass-card {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  /* Hide desktop-only outer card */
+  .solution-section > .container > .glass-card {
+    display: none !important;
+  }
+}

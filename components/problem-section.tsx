@@ -3,7 +3,7 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 
 export function ProblemSection() {
   return (
-    <section className="py-20">
+    <section className="problem-section py-20">
       <div className="container mx-auto px-6">
         <div className="glass-card rounded-3xl p-12 max-w-6xl mx-auto">
           <ScrollReveal direction="up">

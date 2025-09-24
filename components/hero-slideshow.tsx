@@ -80,7 +80,7 @@ export function HeroSlideshow() {
   }
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-fit md:min-h-screen overflow-hidden">
       {/* Floating logo + button before nav */}
       <AnimatePresence>
         {!showNav && (
@@ -122,31 +122,33 @@ export function HeroSlideshow() {
           index === currentSlide && (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
+              className={`relative w-full transition-opacity duration-1000 ${
                 index === currentSlide ? "opacity-100" : "opacity-0"
               }`}
             >
-              <Image
-                src={slide.image || "/placeholder.svg"}
-                alt={`Hero slide ${index + 1}`}
-                fill
-                className="object-cover"
-                priority={index === 0}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20 dark:from-black/90 dark:via-black/60 dark:to-black/30" />
+              <div className="relative w-full h-[320px] sm:h-[420px] md:h-screen">
+                <Image
+                  src={slide.image || "/placeholder.svg"}
+                  alt={`Hero slide ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10 dark:from-black/80 dark:via-black/50 dark:to-black/20" />
+              </div>
             </div>
           ),
       )}
 
       {/* Hero content */}
-      <div className="relative z-10 min-h-screen flex items-end justify-start pb-16 pl-6 md:pl-12">
+      <div className="relative z-10 min-h-[300px] md:min-h-screen flex items-end justify-start pb-10 md:pb-16 pl-6 md:pl-12">
         <ScrollReveal direction="up" delay={0.5}>
           <div className="max-w-xl">
             <div key={currentSlide}>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-balance text-white font-serif text-shadow-lg">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-balance text-black dark:text-white font-serif text-shadow-lg">
                 {slides[currentSlide].title}
               </h1>
-              <p className="text-sm md:text-base text-white/90 mb-4 text-pretty font-sans leading-relaxed">
+              <p className="text-sm md:text-base mb-4 text-pretty font-sans leading-relaxed text-black/80 dark:text-white/90">
                 {slides[currentSlide].subtitle}
               </p>
 
@@ -166,7 +168,10 @@ export function HeroSlideshow() {
       {/* Slide controls */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-200 btn-secondary-hover"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full 
+                   bg-black/10 text-black border border-black/20 hover:bg-black/20 
+                   dark:bg-white/10 dark:text-white dark:border-white/20 dark:hover:bg-white/20 
+                   backdrop-blur-sm transition-all duration-200 btn-secondary-hover"
         disabled={isAnimating}
       >
         <svg className="w-6 h-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -176,7 +181,10 @@ export function HeroSlideshow() {
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-200 btn-secondary-hover"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full 
+                   bg-black/10 text-black border border-black/20 hover:bg-black/20 
+                   dark:bg-white/10 dark:text-white dark:border-white/20 dark:hover:bg-white/20 
+                   backdrop-blur-sm transition-all duration-200 btn-secondary-hover"
         disabled={isAnimating}
       >
         <svg className="w-6 h-6 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -191,7 +199,9 @@ export function HeroSlideshow() {
             key={index}
             onClick={() => goToSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? "bg-primary scale-125 shadow-lg" : "bg-white/40 hover:bg-white/60"
+              index === currentSlide
+                ? "bg-primary scale-125 shadow-lg"
+                : "bg-black/40 hover:bg-black/60 dark:bg-white/40 dark:hover:bg-white/60"
             }`}
             disabled={isAnimating}
           />

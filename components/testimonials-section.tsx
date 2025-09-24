@@ -7,10 +7,10 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 const testimonials = [
   {
     id: 1,
-    name: "Sarah Chen",
+    name: "Petra Somen",
     role: "Spa Owner",
     company: "Serenity Wellness Spa",
-    image: "/testimonial-sarah.jpg",
+    image: "/ceo.jpeg",
     content:
       "Aurea transformed our client experience completely. We went from missing 30% of calls to capturing every opportunity. Our booking rate increased by 85% in just two months.",
     rating: 5,
@@ -20,7 +20,7 @@ const testimonials = [
     name: "Dr. Michael Rodriguez",
     role: "Medical Director",
     company: "Elite Medical Clinic",
-    image: "/testimonial-michael.jpg",
+    image: "/doc.jpeg ",
     content:
       "The precision and professionalism Aurea brings to our patient communications is remarkable. Our no-show rate dropped to under 5%, and patient satisfaction scores are at an all-time high.",
     rating: 5,
@@ -30,7 +30,7 @@ const testimonials = [
     name: "Amanda Foster",
     role: "Hotel Manager",
     company: "Boutique Grand Hotel",
-    image: "/testimonial-amanda.jpg",
+    image: "/hotel.jpeg",
     content:
       "Aurea doesn't just manage our reservations—it elevates every guest interaction. Our team can focus on creating memorable experiences while Aurea handles the seamless coordination.",
     rating: 5,

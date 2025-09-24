@@ -3,8 +3,9 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 
 export function KeyBenefitsSection() {
   return (
-    <section className="py-20">
+    <section className="key-benefits-section py-20">
       <div className="container mx-auto px-6">
+        {/* Keep visible on all screens */}
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text side */}
