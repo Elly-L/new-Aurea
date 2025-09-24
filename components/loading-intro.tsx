@@ -1,6 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { PulsingBorder } from "@paper-design/shaders-react"
 import Image from "next/image"
 
 export default function LoadingIntro({ onDone }: { onDone: () => void }) {
@@ -20,45 +22,74 @@ export default function LoadingIntro({ onDone }: { onDone: () => void }) {
     return () => clearTimeout(timer)
   }, [onDone])
 
-  if (!show) return null
-
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#D4AF37] transition-opacity duration-600 ease-in-out">
-      {/* Circle wrapper */}
-      <div
-        className={`relative transition-all duration-1000 ease-in-out ${
-          docked ? "fixed bottom-5 right-5 w-20 h-20 scale-50" : "w-40 h-40 scale-100"
-        }`}
-        style={{ willChange: "transform" }}
-      >
-        <div className="absolute inset-0 w-full h-full rounded-full">
-          {/* Outer luxury ring with gold gradient */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#EAD7BD] to-[#D4AF37] animate-pulse opacity-80" />
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[#0D0D0D] via-[#1A1A1A] to-[#D4AF37]"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+        >
+          {/* Circle wrapper */}
+          <motion.div
+            className="relative"
+            initial={{
+              scale: 1,
+              width: 160,
+              height: 160,
+            }}
+            animate={
+              docked
+                ? {
+                    scale: 0.5,
+                    width: 80,
+                    height: 80,
+                    bottom: 20,
+                    right: 20,
+                    position: "absolute",
+                  }
+                : {
+                    scale: 1,
+                    width: 160,
+                    height: 160,
+                    position: "relative",
+                  }
+            }
+            transition={{ duration: 1, ease: "easeInOut" }}
+            style={{ willChange: "transform" }}
+          >
+            {/* Glowing ring + subtle fireballs */}
+            {/* @ts-ignore */}
+            <PulsingBorder
+              colors={["#FFD700", "#FF6B35", "#8A2BE2"]}
+              colorBack="#00000000"
+              speed={1.2}
+              roundness={1}
+              thickness={0.22}   // visible ring thickness
+              softness={0.02}    // sharp edges, slight blend
+              intensity={3.5}    // balanced glow
+              spots={4}          // a few fireballs
+              spotSize={0.25}    // small subtle sparks
+              pulse={0.15}       // gentle breathing
+              smoke={0}          // no heavy smoke blur
+              smokeSize={0}
+              scale={1}
+              rotation={0}
+              frame={9161408.251009725}
+              style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+            />
 
-          {/* Middle ring with champagne accent */}
-          <div
-            className="absolute inset-2 rounded-full bg-gradient-to-r from-[#EAD7BD] via-[#D4AF37] to-[#EAD7BD] animate-pulse opacity-60"
-            style={{ animationDelay: "300ms" }}
-          />
+            {/* Logo inside */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image src="/aurea-logo.png" alt="Aurea Logo" width={40} height={40} />
+            </div>
+          </motion.div>
 
-          {/* Inner glow ring */}
-          <div
-            className="absolute inset-4 rounded-full bg-gradient-to-r from-[#D4AF37]/40 via-[#EAD7BD]/40 to-[#D4AF37]/40 animate-pulse"
-            style={{ animationDelay: "700ms" }}
-          />
-
-          {/* Core background */}
-          <div className="absolute inset-6 rounded-full bg-[#0D0D0D]/80 backdrop-blur-sm" />
-        </div>
-
-        {/* Logo inside */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Image src="/aurea-logo.png" alt="Aurea Logo" width={40} height={40} />
-        </div>
-      </div>
-
-      {!docked && <TypingBrand />}
-    </div>
+          {!docked && <TypingBrand />}
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
@@ -78,7 +109,10 @@ function TypingBrand() {
   }, [])
   return (
     <div className="mt-4 text-center">
-      <span className="text-white text-lg md:text-2xl font-light tracking-wide font-serif">
+      <span
+        className="text-white text-lg md:text-2xl font-light tracking-wide"
+        style={{ fontFamily: "Cormorant Garamond, Playfair Display, serif" }}
+      >
         {display}
         <span className="inline-block w-1.5 h-5 md:h-6 bg-white ml-2 animate-pulse align-[-2px]" />
       </span>
