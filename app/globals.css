@@ -352,8 +352,15 @@
     border-radius: 0 !important;
   }
 
-  /* Hide desktop-only outer card */
-  .solution-section > .container > .glass-card {
+ /* Hide only on mobile */
+@media (max-width: 768px) {
+  .solution-section .hidden.md\:block {
     display: none !important;
   }
+
+  .solution-section .block.md\:hidden {
+    display: block !important;
+  }
+}
+
 }
